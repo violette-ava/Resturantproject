@@ -3,10 +3,12 @@ import java.util.ArrayList;
 
 public class Resturant {
     static Scanner sc = new Scanner(System.in);
-
+    private static ArrayList<Food> menu;
+    private static ArrayList<Orders> orders;
+    
 
     public static void main(String[] args){
-
+       
         System.out.print("Welcome To My Resturant");
         
         int choice = 1;
@@ -36,9 +38,13 @@ public class Resturant {
                 optionFour();
             }
 
-            private static void optionOne(){
+            public String
 
-            }
+            
+
+
+
+           
 
         }
         
@@ -54,5 +60,13 @@ public class Resturant {
 
     }
 
+
+    private static void optionOne() {
+        System.out.println("Thank you for choosing to Dine-In");
+
+    }
+
+
+  
     
 }
