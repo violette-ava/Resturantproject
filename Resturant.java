@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Resturant {
-    private static ArrayList<Orders>  orders = new ArrayList<>();
+    private static ArrayList<Order>  orders = new ArrayList<>();
     private static ArrayList<Food> menu = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
     String[] PossibleStatuses;
-    PossibleStatuses = new String[];
    
 
 
@@ -77,27 +76,38 @@ public class Resturant {
                 int choice2 = sc.nextInt();
                 sc.nextLine();
 
+                for(int i =0; i<orders.size();i++){
+                    System.out.println(i+" "+orders.get(i));
+                }
+                System.out.println("Choice:");
+                int on = sc.nextInt();
+                sc.nextLine();
+                Order o = orders.get(on);
+
+
                 if (choice2 == 1) {
-                    optionUpdateStatus(orders);
+                    optionUpdateStatus(o);
                 } else if (choice2 == 2) {
-                    optionAddDish(orders);
+                    optionAddDish(o);
                 } else if (choice2 == 3) {
-                    optionRemoveDish(orders);
+                    optionRemoveDish(o);
                 } else if (choice2 == 4) {
-                    optionCancelOrder(orders);
+                    optionCancelOrder(o);
                 }
             }
 
+        }
 
 
-            }
+
+            
 
             ArrayList<Food> menu = new ArrayList<>();
             menu.add(new Food("Pizza", 5));
             menu.add(new Food("Ice Cream", 3));
             menu.add(new Food("Salad",7));
             menu.add(new Food("Sandwich",12));
-            menu.add(new Food("Cake",8));
+            menu.add(new Food("Cake",8));}
 
     
 
@@ -124,88 +134,96 @@ public class Resturant {
                         System.out.println("Invalid choice");
                     }
                 }
-                return Dishes;//TODO
-    
-
-
-
-
-
-                public static void listOrders(int n){                   //TODO
-                    if(n == 1){
-                    }else if(n == 2){
-                        HashSet<String> orderTypes = new HashSet<>();
-                        for(Orders o: orders)
-                            orderTypes.add(getType(o));
-            
-                        for(String orderType:  orderTypes){
-                            for(Orders o: orders){
-                                if(getType(o).equals(orderType)){
-                                    System.out.println(o);
-                                }
-                            }
-                        }
-            
-            
-                    }else if(n == 3){//Print orders by status TODO
-            
-                    }
-                }
-            
-
-
-
-
-            private static String getType(Orders o) {//TODO
-                
+                return Dishes;
             }
+
+            
+
+
+
+
+
     
-        }
+        
 
     
 
  
+
+private static String getType(Order o) {
+                
 }
 
-    public String[] getPossibleStatuses(){
-    String[] s= {"Placed", "Cooking", "Served", "Canceled"};
-    return s;
-    
+public static void listOrders(int n){                   //TODO
+    if(n == 1){
+    }else if(n == 2){
+        HashSet<String> orderTypes = new HashSet<>();
+        for(Order o: orders)
+            orderTypes.add(getType(o));
+
+        for(String orderType:  orderTypes){
+            for(Order o: orders){
+                if(getType(o).equals(orderType)){
+                    System.out.println(o);
+                }
+            }
+        }
+
+
+    }else if(n == 3){
+        for(Order o: orders){
+            System.out.println(orders.getPossibleStatuses());
+        }
+       
+    }
 }
 
 
 
-    private static void optionUpdateStatus(ArrayList<Orders> orders2) {
+
+    private static void optionUpdateStatus(Order o) {
        
         System.out.print("Updating Status...");
-        for(String i=0; i<PossibleStatuses.length;)
-        orders2.getPossibleStatuses(i+1);
+        String[]  statuses  = o.getPossibleStatuses();
+        
+        for(int i=0; i<statuses.length;i++){
+            System.out.println(i +" "+statuses[i]);
+        }
+        int choice = sc.nextInt();
+        sc.nextLine();
+
+        o.setStatus(statuses[choice]);
 
     }
 
-    private static void optionAddDish(ArrayList<Orders> orders2){
+    private static void optionAddDish(Order o){
         System.out.println("Add a Dish");
         System.out.println(menu);
-        String d = sc.nextLine();
-        orders2.add(d);
+        int menuItem  = sc.nextInt();
+        sc.nextLine();
+
+        o.addDish(menu.get(menuItem));
       
     }
 
-    private static void optionRemoveDish(ArrayList<Orders> orders2){
+    private static void optionRemoveDish(Order o){
         System.out.println("Remove a Dish");
-        ArrayList<Orders> orderToRemove= r.getDishes();
-        for (int index = 0; index < Orders.size(); index++) {
-            System.out.println(index + " " + Orders.get(index));
-        System.out.println("Choice:");
-        int ans = sc.nextInt();
-        Orders c = orders.get(ans);
-        r.removeDish(c);
+        System.out.println(menu);
+        int menuItem  = sc.nextInt();
+        sc.nextLine();
+
+        o.removeDish(menu.get(menuItem));
+       
     }
 
-    private static void optionCancelOrder(ArrayList<Orders> orders2){
+    private static Order optionCancelOrder(Order o){
         System.out.println("Canceling Order");
-        //HOW DO I DO THIS
+        o.setStatus = "Canceled";
+        return o;
     }
+
+
+            
 
 
 

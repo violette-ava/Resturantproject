@@ -1,4 +1,4 @@
-public class TableOrder extends Orders  {
+public class TableOrder extends Order  {
     private String customer;
     private int numOfGuests;
     public int getNumOfGuests() {

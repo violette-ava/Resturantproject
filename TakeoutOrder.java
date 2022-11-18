@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class TakeoutOrder extends Orders {
+public class TakeoutOrder extends Order {
     private String customer;
 
 
