@@ -22,6 +22,15 @@ public class TakeoutOrder extends Orders {
         this.customer = customer;
     }
 
+    public String toString(){
+        return super.toString()+ customer;
+    }
+
+    public String[] getPossibleStatuses(){
+        String[] s = {"Placed", "Cooking", "Waiting for Pickup", "Delivered", "Canceled"};
+        return s;
+    }
+
 
 
 }

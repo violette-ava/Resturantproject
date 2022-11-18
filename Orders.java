@@ -9,6 +9,7 @@ public class Orders {
         this.dishes = dishes;
         totalOrders++;
         this.orderNumber = totalOrders;
+        status = "Placed";
     }
 
     public Orders(){
@@ -21,6 +22,7 @@ public class Orders {
    
     public ArrayList<Food> getDishes() {
         return dishes;
+        return orderNumber == o.orderNumber;        //TODO
     }
 
     public void setDishes(ArrayList<Food> dishes) {
@@ -40,6 +42,16 @@ public class Orders {
         return orderNumber == o.orderNumber;
         
     }
+
+    public double getTotal(){
+        return 0.0;
+    }
+
+    public String toString(){
+        return "Order No:"+orderNumber+" Status: "+status+" Number of Dishes:"+dishes.size()+" Total: "+getTotal()+" ";
+    }
+
+
 
     
 
