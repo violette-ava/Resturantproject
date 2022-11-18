@@ -8,6 +8,7 @@ public class Resturant {
     private static ArrayList<Food> menu = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
     String[] PossibleStatuses;
+
    
 
 
@@ -22,7 +23,7 @@ public class Resturant {
         while(choice >0){
             System.out.println();
             System.out.println();
-            System.out.println("Where will you being dining tonight?");
+            System.out.println("Welcome");
             System.out.println("1) Dine-In");
             System.out.println("2) Takeout");
             System.out.println("3) Delievery");
@@ -37,37 +38,43 @@ public class Resturant {
 
             switch(choice){ 
                 case 1:
-                System.out.println("TableOrder code goes here");//TODO 
+                System.out.println("Customer Name");
+                String customer = sc.nextLine();
+                System.out.println("Number of guests?");
+                int numOfGuests = sc.nextInt();
+                sc.nextLine();
+                int tableNumber = 1;
                 break;
                 case 2:
-                System.out.println("TakeoutOrder goes here"); //TODO 
+                System.out.println("Customer Name");
+                customer = sc.nextLine();
                 break;
                 case 3:
                 System.out.print("Customer Name: ");
-                String customer = sc.nextLine();
+                customer = sc.nextLine();
                 System.out.print("Address: ");
                 String addr =sc.nextLine();
                 System.out.print("Phone: ");
                 String phone = sc.nextLine();
-                ArrayList<Food> dishes = getDishes();//TODO
-                DeliveryOrder  o = new DeliveryOrder(customer, addr, phone);
-                o.setDishes(dishes);
-                orders.add(o);
+                ArrayList<Food> dishes = getDishes();
+                DeliveryOrder  dl = new DeliveryOrder(customer, addr, phone);
+                dl.setDishes(dishes);
+                orders.add(dl);
 
                 break;
                 case 4:
                 choice = 4;
                 while(choice <1 || choice > 3){
-                    System.out.println("Sort by:  1.Order number 2)Type 3)Status ");
+                    System.out.println("Sort by:  1.Order number 2.Type 3.Status");
                     choice = sc.nextInt();
                     sc.nextLine(); 
                 }    
-                listOrders(choice);//TODO
+                listOrders(choice);
                 break;
                 case 5:
                 choice = 5;
                 System.out.println("Update Order:");
-                System.out.println("1)Update Status");
+                System.out.println("1) Update Status");
                 System.out.println("2) Add Dish");
                 System.out.println("3) Remove Dish");
                 System.out.println("4) Cancel Order");
@@ -115,7 +122,7 @@ public class Resturant {
 
 
 
-            public static ArrayList<Food> getDishes(){//TODO
+            public static ArrayList<Food> getDishes(){
                 ArrayList<Food>  Dishes =new ArrayList<>();
                 int ans = 1;
                 while(ans !=0){
@@ -123,6 +130,7 @@ public class Resturant {
                         System.out.println(i+1+" "+menu.get(i));
                     }
                     System.out.println("Enter Choice (-1 to exit): ");
+                    System.out.println(menu);
                     ans = sc.nextInt();
                     sc.nextLine();
                     if(ans > 0 && ans <=menu.size()){
@@ -151,10 +159,23 @@ public class Resturant {
  
 
 private static String getType(Order o) {
+    if(o instanceof TakeoutOrder ){
+        return "TakeoutOrder";
+    }
+    else if(o instanceof DeliveryOrder){
+        return "DeliveryOrder";
+    }else if(o instanceof TableOrder){
+        return "TableOrder";
+    }
+    else{
+        return "";
+    }
+
+
                 
 }
 
-public static void listOrders(int n){                   //TODO
+public static void listOrders(int n){                   
     if(n == 1){
     }else if(n == 2){
         HashSet<String> orderTypes = new HashSet<>();
@@ -170,13 +191,23 @@ public static void listOrders(int n){                   //TODO
         }
 
 
-    }else if(n == 3){
+    }else if(n == 3){ //Print order by status
         for(Order o: orders){
-            System.out.println(orders.getPossibleStatuses());
+            System.out.println("Status:" + o.setStatus);
         }
        
     }
 }
+
+public String[] getPossibleStatuses(){
+    String[] s = {"Placed", "Cooking", "Canceled"};
+    return s;
+}
+
+public void setStatus(String s){
+   String status =s;
+}
+
 
 
 
